@@ -5,17 +5,12 @@
 const PASS = "1009";
 
 let enteredCode = "";
-
 let audioCtx = null;
-
 let candlesBlown = false;
 
 let musicPlaying = false;
-
 let musicTimer = null;
-
 let musicStep = 0;
-
 
 
 // ==========================================
@@ -34,9 +29,7 @@ function initAudio() {
 
     }
 
-    if (
-        audioCtx.state === "suspended"
-    ) {
+    if (audioCtx.state === "suspended") {
 
         audioCtx.resume();
 
@@ -45,6 +38,9 @@ function initAudio() {
 }
 
 
+// ==========================================
+// 🎵 MAIN TONE FUNCTION
+// ==========================================
 
 function tone(
     freq,
@@ -64,15 +60,26 @@ function tone(
 
     osc.type = type;
 
-    osc.frequency.value = freq;
-
-
-    gain.gain.setValueAtTime(
-        volume,
+    osc.frequency.setValueAtTime(
+        freq,
         audioCtx.currentTime
     );
 
 
+    // Smooth attack
+    gain.gain.setValueAtTime(
+        0.001,
+        audioCtx.currentTime
+    );
+
+
+    gain.gain.exponentialRampToValueAtTime(
+        volume,
+        audioCtx.currentTime + 0.025
+    );
+
+
+    // Smooth fade out
     gain.gain.exponentialRampToValueAtTime(
         0.001,
         audioCtx.currentTime + duration
@@ -88,12 +95,14 @@ function tone(
 
     osc.start();
 
+
     osc.stop(
-        audioCtx.currentTime + duration
+        audioCtx.currentTime +
+        duration +
+        0.03
     );
 
 }
-
 
 
 // ==========================================
@@ -134,7 +143,6 @@ const birthdayMelody = [
 ];
 
 
-
 function playBirthdayMusic() {
 
     if (musicPlaying)
@@ -150,7 +158,6 @@ function playBirthdayMusic() {
     playNextBirthdayNote();
 
 }
-
 
 
 function playNextBirthdayNote() {
@@ -181,14 +188,16 @@ function playNextBirthdayNote() {
         note[1];
 
 
+    // Main note
     tone(
         frequency,
-        duration * .85,
-        .045,
+        duration * .90,
+        .065,
         "sine"
     );
 
 
+    // Soft harmony
     setTimeout(() => {
 
         if (!musicPlaying)
@@ -198,7 +207,7 @@ function playNextBirthdayNote() {
         tone(
             frequency * 1.5,
             duration * .45,
-            .012,
+            .018,
             "sine"
         );
 
@@ -217,7 +226,6 @@ function playNextBirthdayNote() {
 }
 
 
-
 function stopBirthdayMusic() {
 
     musicPlaying = false;
@@ -234,7 +242,6 @@ function stopBirthdayMusic() {
     }
 
 }
-
 
 
 // ==========================================
@@ -262,15 +269,11 @@ const letterMelody = [
 ];
 
 
-let letterMusicPlaying =
-    false;
+let letterMusicPlaying = false;
 
-let letterMusicTimer =
-    null;
+let letterMusicTimer = null;
 
-let letterMusicStep =
-    0;
-
+let letterMusicStep = 0;
 
 
 function playLetterMusic() {
@@ -284,16 +287,13 @@ function playLetterMusic() {
 
     initAudio();
 
-
     letterMusicPlaying = true;
 
     letterMusicStep = 0;
 
-
     playNextLetterNote();
 
 }
-
 
 
 function playNextLetterNote() {
@@ -321,8 +321,8 @@ function playNextLetterNote() {
 
     tone(
         note[0],
-        note[1] * .85,
-        .025,
+        note[1] * .90,
+        .040,
         "sine"
     );
 
@@ -337,7 +337,6 @@ function playNextLetterNote() {
         );
 
 }
-
 
 
 function stopLetterMusic() {
@@ -356,7 +355,6 @@ function stopLetterMusic() {
     }
 
 }
-
 
 
 // ==========================================
@@ -385,7 +383,6 @@ function showScreen(id) {
 }
 
 
-
 // ==========================================
 // 🔐 PASSCODE
 // ==========================================
@@ -412,7 +409,6 @@ const clearButton =
     document.getElementById(
         "clear"
     );
-
 
 
 numberButtons.forEach(
@@ -445,10 +441,11 @@ numberButtons.forEach(
                     );
 
 
+                // 🔢 Longer key sound
                 tone(
                     500,
-                    .06,
-                    .035
+                    .12,
+                    .045
                 );
 
 
@@ -472,7 +469,6 @@ numberButtons.forEach(
 
     }
 );
-
 
 
 // ==========================================
@@ -499,13 +495,12 @@ clearButton.addEventListener(
 
         tone(
             300,
-            .08,
-            .04
+            .14,
+            .045
         );
 
     }
 );
-
 
 
 // ==========================================
@@ -518,10 +513,12 @@ function checkPassword() {
         enteredCode === PASS
     ) {
 
+        // 🔓 Success sound
+
         tone(
             523.25,
-            .12,
-            .07
+            .25,
+            .075
         );
 
 
@@ -529,22 +526,22 @@ function checkPassword() {
 
             tone(
                 659.25,
-                .12,
-                .07
+                .25,
+                .075
             );
 
-        }, 100);
+        }, 150);
 
 
         setTimeout(() => {
 
             tone(
                 783.99,
-                .20,
-                .07
+                .40,
+                .085
             );
 
-        }, 200);
+        }, 300);
 
 
         setTimeout(() => {
@@ -559,17 +556,31 @@ function checkPassword() {
                 "giftQuestion"
             );
 
-        }, 500);
+        }, 650);
 
 
     } else {
 
+        // ❌ Wrong password
+
         tone(
             180,
-            .15,
-            .06,
+            .35,
+            .065,
             "square"
         );
+
+
+        setTimeout(() => {
+
+            tone(
+                140,
+                .25,
+                .035,
+                "square"
+            );
+
+        }, 120);
 
 
         wrong.textContent =
@@ -578,14 +589,12 @@ function checkPassword() {
 
         enteredCode = "";
 
-
         display.textContent =
             "••••";
 
     }
 
 }
-
 
 
 // ==========================================
@@ -604,7 +613,6 @@ const noButton =
     );
 
 
-
 yesButton.addEventListener(
     "click",
     () => {
@@ -614,8 +622,8 @@ yesButton.addEventListener(
 
         tone(
             523.25,
-            .12,
-            .06
+            .25,
+            .065
         );
 
 
@@ -623,11 +631,22 @@ yesButton.addEventListener(
 
             tone(
                 659.25,
-                .16,
-                .06
+                .35,
+                .075
             );
 
-        }, 100);
+        }, 150);
+
+
+        setTimeout(() => {
+
+            tone(
+                783.99,
+                .45,
+                .075
+            );
+
+        }, 320);
 
 
         showScreen(
@@ -636,7 +655,6 @@ yesButton.addEventListener(
 
     }
 );
-
 
 
 // ==========================================
@@ -659,12 +677,11 @@ function moveNoButton() {
 
     tone(
         250,
-        .06,
-        .025
+        .12,
+        .03
     );
 
 }
-
 
 
 noButton.addEventListener(
@@ -685,7 +702,6 @@ noButton.addEventListener(
 );
 
 
-
 // ==========================================
 // 🎁 OPEN GIFT
 // ==========================================
@@ -702,7 +718,6 @@ const box =
     );
 
 
-
 openGiftButton.addEventListener(
     "click",
     () => {
@@ -710,10 +725,12 @@ openGiftButton.addEventListener(
         initAudio();
 
 
+        // 🎁 Magical opening melody
+
         tone(
             261.63,
-            .12,
-            .07
+            .25,
+            .075
         );
 
 
@@ -721,33 +738,46 @@ openGiftButton.addEventListener(
 
             tone(
                 329.63,
-                .12,
-                .07
+                .25,
+                .075
             );
 
-        }, 100);
+        }, 180);
 
 
         setTimeout(() => {
 
             tone(
                 392,
-                .15,
-                .07
+                .30,
+                .075
             );
 
-        }, 200);
+        }, 360);
 
 
         setTimeout(() => {
 
             tone(
                 523.25,
-                .25,
-                .07
+                .50,
+                .085
             );
 
-        }, 300);
+        }, 540);
+
+
+        // ✨ High sparkle
+
+        setTimeout(() => {
+
+            tone(
+                783.99,
+                .35,
+                .040
+            );
+
+        }, 700);
 
 
         box.classList.add(
@@ -768,7 +798,6 @@ openGiftButton.addEventListener(
 
     }
 );
-
 
 
 // ==========================================
@@ -793,8 +822,9 @@ const micStatus =
     );
 
 
-
-// Manual
+// ==========================================
+// MANUAL BLOW
+// ==========================================
 
 skipButton.addEventListener(
     "click",
@@ -808,8 +838,9 @@ skipButton.addEventListener(
 );
 
 
-
-// Microphone
+// ==========================================
+// MICROPHONE BUTTON
+// ==========================================
 
 blowButton.addEventListener(
     "click",
@@ -821,7 +852,6 @@ blowButton.addEventListener(
 
     }
 );
-
 
 
 // ==========================================
@@ -928,12 +958,14 @@ async function startMicrophone() {
 
                 extinguishCandles();
 
+
                 stream
                     .getTracks()
                     .forEach(
                         track =>
                             track.stop()
                     );
+
 
                 return;
 
@@ -960,7 +992,6 @@ async function startMicrophone() {
 }
 
 
-
 // ==========================================
 // 💨 EXTINGUISH CANDLES
 // ==========================================
@@ -977,8 +1008,9 @@ function extinguishCandles() {
     stopBirthdayMusic();
 
 
-
-    // Flames
+    // ======================================
+    // 🔥 FLAMES
+    // ======================================
 
     document
         .querySelectorAll(".flame")
@@ -991,8 +1023,9 @@ function extinguishCandles() {
         });
 
 
-
-    // Wind
+    // ======================================
+    // 💨 WIND ANIMATION
+    // ======================================
 
     const wind =
         document.getElementById(
@@ -1017,9 +1050,8 @@ function extinguishCandles() {
     }
 
 
-
     // ======================================
-    // 💨 WHOOSH SOUND
+    // 💨 LONG WHOOSH SOUND
     // ======================================
 
     initAudio();
@@ -1037,27 +1069,37 @@ function extinguishCandles() {
         "sawtooth";
 
 
+    // High → Low
+
     osc.frequency.setValueAtTime(
-        500,
+        650,
         audioCtx.currentTime
     );
 
 
     osc.frequency.exponentialRampToValueAtTime(
-        70,
-        audioCtx.currentTime + .45
+        55,
+        audioCtx.currentTime + .95
     );
 
 
+    // Smooth volume
+
     gain.gain.setValueAtTime(
-        .055,
+        0.001,
         audioCtx.currentTime
     );
 
 
     gain.gain.exponentialRampToValueAtTime(
+        .075,
+        audioCtx.currentTime + .08
+    );
+
+
+    gain.gain.exponentialRampToValueAtTime(
         .001,
-        audioCtx.currentTime + .45
+        audioCtx.currentTime + .95
     );
 
 
@@ -1072,9 +1114,8 @@ function extinguishCandles() {
 
 
     osc.stop(
-        audioCtx.currentTime + .45
+        audioCtx.currentTime + 1.0
     );
-
 
 
     // ======================================
@@ -1085,43 +1126,45 @@ function extinguishCandles() {
 
         tone(
             880,
-            .12,
-            .06
+            .25,
+            .065
         );
 
-    }, 400);
+    }, 550);
 
 
     setTimeout(() => {
 
         tone(
             1046.50,
-            .15,
-            .06
+            .30,
+            .065
         );
 
-    }, 520);
+    }, 720);
 
 
     setTimeout(() => {
 
         tone(
             1318.51,
-            .25,
-            .06
+            .45,
+            .070
         );
 
-    }, 650);
+    }, 920);
 
 
-
-    // Confetti
+    // ======================================
+    // 🎉 CONFETTI
+    // ======================================
 
     createConfetti();
 
 
-
-    // Letter
+    // ======================================
+    // 💌 LETTER
+    // ======================================
 
     setTimeout(() => {
 
@@ -1135,7 +1178,6 @@ function extinguishCandles() {
     }, 1600);
 
 }
-
 
 
 // ==========================================
@@ -1152,7 +1194,6 @@ const ctx =
     canvas.getContext(
         "2d"
     );
-
 
 
 function resizeCanvas() {
@@ -1173,7 +1214,6 @@ window.addEventListener(
     "resize",
     resizeCanvas
 );
-
 
 
 function createConfetti() {
@@ -1218,7 +1258,6 @@ function createConfetti() {
         });
 
     }
-
 
 
     function animate() {
@@ -1310,7 +1349,6 @@ function createConfetti() {
 }
 
 
-
 // ==========================================
 // 🔄 REPLAY
 // ==========================================
@@ -1319,7 +1357,6 @@ const replayButton =
     document.getElementById(
         "replay"
     );
-
 
 
 replayButton.addEventListener(
@@ -1334,10 +1371,12 @@ replayButton.addEventListener(
         stopLetterMusic();
 
 
+        // Replay sound
+
         tone(
             523.25,
-            .12,
-            .06
+            .25,
+            .065
         );
 
 
@@ -1345,11 +1384,22 @@ replayButton.addEventListener(
 
             tone(
                 659.25,
-                .15,
-                .06
+                .30,
+                .075
             );
 
-        }, 100);
+        }, 150);
+
+
+        setTimeout(() => {
+
+            tone(
+                783.99,
+                .40,
+                .075
+            );
+
+        }, 300);
 
 
         candlesBlown = false;
@@ -1366,7 +1416,6 @@ replayButton.addEventListener(
                 );
 
             });
-
 
 
         // Reset wind
@@ -1386,7 +1435,6 @@ replayButton.addEventListener(
         }
 
 
-
         // Reset code
 
         enteredCode = "";
@@ -1400,28 +1448,26 @@ replayButton.addEventListener(
             "";
 
 
-
         // Reset no button
 
         noButton.style.transform =
             "translate(0, 0)";
 
 
-
-        // Reset box
+        // Reset gift
 
         box.classList.remove(
             "open"
         );
 
 
-
-        // Reset microphone text
+        // Reset microphone
 
         micStatus.textContent =
             "";
 
 
+        // Go back
 
         showScreen(
             "lock"
