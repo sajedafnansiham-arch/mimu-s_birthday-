@@ -1,0 +1,759 @@
+* {
+    box-sizing: border-box;
+}
+
+:root {
+    --blue: #8fb6d9;
+    --dark: #263b4d;
+    --paper: #f7f4e9;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    background: #101820;
+    font-family: Georgia, "Times New Roman", serif;
+    color: var(--dark);
+    overflow: hidden;
+}
+
+
+/* =========================
+   SCREEN
+========================= */
+
+.screen {
+    display: none;
+    min-height: 100vh;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.screen.active {
+    display: flex;
+    animation: fade 0.65s ease;
+}
+
+
+/* =========================
+   MAIN PAPER
+========================= */
+
+.paper {
+    width: min(92vw, 520px);
+    min-height: 650px;
+    padding: 48px 28px;
+
+    background-color: var(--paper);
+
+    background-image:
+        linear-gradient(#d9e1e5 1px, transparent 1px),
+        linear-gradient(90deg, #d9e1e5 1px, transparent 1px);
+
+    background-size: 28px 28px;
+
+    border-radius: 18px;
+
+    box-shadow: 0 20px 60px #0008;
+
+    position: relative;
+
+    text-align: center;
+}
+
+.paper::before {
+    content: "";
+
+    position: absolute;
+
+    inset: 10px;
+
+    border: 2px dashed #9cb4c5;
+
+    border-radius: 14px;
+
+    pointer-events: none;
+}
+
+
+/* =========================
+   TEXT
+========================= */
+
+h1 {
+    font-size: 32px;
+    margin: 20px 0 12px;
+}
+
+h2 {
+    font-size: 30px;
+    line-height: 1.2;
+    margin: 35px 0 5px;
+}
+
+.cute,
+.doodle,
+.confetti {
+    font-size: 25px;
+    color: #6c9bc0;
+}
+
+.question {
+    font-size: 23px;
+    margin: 5px 0 20px;
+}
+
+.tiny {
+    font-size: 19px;
+    margin-top: 40px;
+}
+
+
+/* =========================
+   PASSCODE
+========================= */
+
+.display {
+    height: 52px;
+
+    font-size: 31px;
+
+    letter-spacing: 10px;
+
+    margin: 20px auto;
+
+    width: 250px;
+
+    padding: 6px;
+
+    background: #dce8f0;
+
+    border-radius: 12px;
+}
+
+.keypad {
+    display: grid;
+
+    grid-template-columns: repeat(3, 70px);
+
+    gap: 12px;
+
+    justify-content: center;
+}
+
+.keypad button,
+.buttons button,
+.mainBtn {
+
+    border: 0;
+
+    border-radius: 18px;
+
+    background: #9ebbd3;
+
+    color: #263b4d;
+
+    font-size: 20px;
+
+    padding: 14px 22px;
+
+    cursor: pointer;
+
+    box-shadow: 0 4px 0 #7899b2;
+
+    transition: 0.15s;
+}
+
+.keypad button {
+    height: 58px;
+    padding: 0;
+}
+
+.keypad button:active,
+.buttons button:active,
+.mainBtn:active {
+
+    transform: translateY(3px);
+
+    box-shadow: 0 1px 0 #7899b2;
+}
+
+.empty {
+    visibility: hidden;
+}
+
+.wrong {
+    height: 20px;
+
+    color: #b44;
+
+    font-size: 14px;
+}
+
+
+/* =========================
+   GIFT
+========================= */
+
+.gift {
+    font-size: 150px;
+
+    margin: 20px;
+
+    animation: bob 2s infinite ease-in-out;
+}
+
+.buttons {
+    display: flex;
+
+    gap: 25px;
+
+    justify-content: center;
+}
+
+#no {
+    position: relative;
+}
+
+
+/* =========================
+   GIFT BOX
+========================= */
+
+.box {
+    margin: 80px auto 35px;
+
+    width: 180px;
+
+    position: relative;
+
+    transition: 0.8s;
+}
+
+.boxbody {
+    font-size: 160px;
+}
+
+.lid {
+    position: absolute;
+
+    font-size: 65px;
+
+    top: -45px;
+
+    left: 58px;
+
+    z-index: 2;
+}
+
+.box.open {
+    transform: scale(1.15) rotate(-2deg);
+}
+
+.box.open .lid {
+    animation: lid 1s forwards;
+}
+
+
+/* =========================
+   CAKE
+========================= */
+
+.sub {
+    font-size: 17px;
+}
+
+.cakeWrap {
+    position: relative;
+
+    width: 280px;
+
+    margin: 45px auto 15px;
+}
+
+.cakeBody {
+    font-size: 190px;
+
+    line-height: 1;
+}
+
+.cakeTop {
+    position: absolute;
+
+    width: 205px;
+
+    height: 25px;
+
+    background: #e8b5bd;
+
+    border-radius: 50%;
+
+    left: 37px;
+
+    top: 38px;
+
+    z-index: 1;
+}
+
+
+/* CANDLES */
+
+.candles {
+    position: absolute;
+
+    top: 3px;
+
+    left: 65px;
+
+    display: flex;
+
+    gap: 28px;
+
+    z-index: 3;
+}
+
+.candles i {
+    width: 8px;
+
+    height: 42px;
+
+    background: #7ca9ca;
+
+    display: block;
+
+    border-radius: 4px;
+}
+
+
+/* FLAMES */
+
+.flames {
+    position: absolute;
+
+    top: -25px;
+
+    left: 54px;
+
+    display: flex;
+
+    gap: 18px;
+
+    z-index: 4;
+
+    font-size: 23px;
+}
+
+.flame {
+    transition: 0.4s;
+}
+
+.flame.off {
+    opacity: 0;
+
+    transform: scale(0.2);
+}
+
+
+/* WIND */
+
+.wind {
+    font-size: 23px;
+
+    height: 35px;
+
+    opacity: 0;
+}
+
+.wind.show {
+    animation: wind 0.8s ease;
+}
+
+
+/* =========================
+   BUTTONS
+========================= */
+
+.mainBtn {
+    margin-top: 10px;
+}
+
+.textBtn {
+
+    display: block;
+
+    margin: 15px auto;
+
+    background: none;
+
+    border: 0;
+
+    text-decoration: underline;
+
+    color: #607f99;
+
+    cursor: pointer;
+}
+
+.status {
+    font-size: 13px;
+
+    min-height: 18px;
+}
+
+
+/* =========================
+   OLD LETTER PAGE
+========================= */
+
+.letterPage {
+
+    width: min(94vw, 620px);
+
+    height: min(92vh, 780px);
+
+    overflow-y: auto;
+
+    padding: 58px 48px 45px;
+
+    position: relative;
+
+    color: #4a3828;
+
+    /* পুরোনো কাগজের base */
+
+    background: #ead9b8;
+
+    box-shadow: 0 20px 65px #0009;
+
+    transform: rotate(-0.4deg);
+
+    border-radius: 3px;
+
+
+    /* পুরোনো কাগজের texture */
+
+    background-image:
+
+        radial-gradient(
+            circle at 20% 15%,
+            #fff3 0 1px,
+            transparent 2px
+        ),
+
+        radial-gradient(
+            circle at 80% 70%,
+            #8a6b4518 0 2px,
+            transparent 3px
+        ),
+
+        linear-gradient(
+            90deg,
+            #c6a97922,
+            transparent 10%,
+            transparent 90%,
+            #b8956220
+        );
+}
+
+
+/* Paper border */
+
+.letterPage::before {
+
+    content: "";
+
+    position: absolute;
+
+    inset: 16px;
+
+    border: 1px solid #9b7b503f;
+
+    pointer-events: none;
+}
+
+
+/* Handwritten lines */
+
+.letterPage::after {
+
+    content: "";
+
+    position: absolute;
+
+    left: 28px;
+
+    right: 28px;
+
+    top: 0;
+
+    height: 100%;
+
+    background:
+
+        repeating-linear-gradient(
+            transparent 0 31px,
+            #80644320 32px
+        );
+
+    z-index: 0;
+
+    pointer-events: none;
+}
+
+
+/* Letter content above lines */
+
+.letterPage > * {
+    position: relative;
+
+    z-index: 1;
+}
+
+
+/* Decoration */
+
+.letterDecor {
+
+    text-align: center;
+
+    font-size: 42px;
+
+    color: #775d3e;
+
+    margin-bottom: 5px;
+}
+
+
+/* Title */
+
+.letterTitle {
+
+    text-align: center;
+
+    font-size: 24px;
+
+    font-style: italic;
+
+    margin: 0 0 12px;
+}
+
+
+/* Lines */
+
+.letterRule {
+
+    height: 1px;
+
+    background: #765b3a66;
+
+    margin: 18px 0 28px;
+}
+
+
+/* Letter */
+
+.letter {
+
+    font-size: 20px;
+
+    line-height: 2;
+
+    text-align: left;
+
+    font-family:
+        "Noto Serif Bengali",
+        "Nirmala UI",
+        Georgia,
+        serif;
+}
+
+
+/* Signature */
+
+.signature {
+
+    text-align: right;
+
+    font-size: 22px;
+
+    font-style: italic;
+
+    margin-top: 22px;
+}
+
+
+/* =========================
+   BACKGROUND
+========================= */
+
+.stars {
+
+    position: fixed;
+
+    inset: 0;
+
+    background:
+
+        radial-gradient(
+            circle at 20% 20%,
+            #fff 0 1px,
+            transparent 2px
+        ),
+
+        radial-gradient(
+            circle at 80% 35%,
+            #fff 0 1px,
+            transparent 2px
+        ),
+
+        radial-gradient(
+            circle at 40% 75%,
+            #fff 0 1px,
+            transparent 2px
+        );
+
+    background-size: 180px 180px;
+
+    opacity: 0.4;
+}
+
+
+/* =========================
+   ANIMATIONS
+========================= */
+
+@keyframes fade {
+
+    from {
+        opacity: 0;
+
+        transform:
+            translateY(15px);
+    }
+
+    to {
+        opacity: 1;
+
+        transform:
+            translateY(0);
+    }
+}
+
+@keyframes bob {
+
+    50% {
+        transform:
+            translateY(-10px);
+    }
+}
+
+@keyframes lid {
+
+    to {
+
+        transform:
+            translateY(-80px)
+            rotate(-20deg);
+
+        opacity: 0.2;
+    }
+}
+
+@keyframes wind {
+
+    0% {
+
+        opacity: 0;
+
+        transform:
+            translateX(-25px);
+    }
+
+    50% {
+
+        opacity: 1;
+
+        transform:
+            translateX(15px);
+    }
+
+    100% {
+
+        opacity: 0;
+
+        transform:
+            translateX(45px);
+    }
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 700px) {
+
+    .letterPage {
+
+        padding:
+            45px
+            28px
+            35px;
+
+        height: 94vh;
+    }
+
+    .letter {
+
+        font-size: 17px;
+
+        line-height: 1.85;
+    }
+
+    .letterTitle {
+
+        font-size: 21px;
+    }
+}
+
+
+@media (max-height: 700px) {
+
+    .paper {
+
+        min-height: 90vh;
+
+        padding:
+            25px
+            20px;
+    }
+
+    .gift {
+
+        font-size: 110px;
+
+        margin: 10px;
+    }
+
+    .box {
+
+        margin:
+            45px
+            auto
+            20px;
+    }
+
+    .cakeWrap {
+
+        margin:
+            25px
+            auto
+            5px;
+    }
+
+    .cakeBody {
+
+        font-size: 145px;
+    }
+}
