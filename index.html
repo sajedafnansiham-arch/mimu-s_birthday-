@@ -1,31 +1,82 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
     <title>For Mimu 🌿</title>
 
-    <link rel="stylesheet" href="style.css">
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+
 </head>
+
 
 <body>
 
+
+    <!-- BACKGROUND -->
+
     <div class="stars"></div>
 
-    <!-- PASSCODE -->
+    <div class="floating-hearts">
 
-    <section id="lock" class="screen active">
+        <span>♡</span>
+        <span>✦</span>
+        <span>♡</span>
+        <span>✧</span>
+        <span>♡</span>
+
+    </div>
+
+
+
+    <!-- ======================================
+         🔐 PASSCODE
+    ======================================= -->
+
+    <section
+        id="lock"
+        class="screen active"
+    >
 
         <div class="paper">
 
-            <div class="cute">✦　✧　✦</div>
+            <div class="cat cat-lock">
+                🐱
+            </div>
 
-            <h1>Enter the passcode</h1>
 
-            <div id="display" class="display">
+            <div class="cute">
+                ✦　✧　✦
+            </div>
+
+
+            <p class="intro">
+                A little surprise for you...
+            </p>
+
+
+            <h1>
+                Enter the passcode
+            </h1>
+
+
+            <div
+                id="display"
+                class="display"
+            >
                 ••••
             </div>
+
 
             <div class="keypad">
 
@@ -42,12 +93,21 @@
                 <button data-n="9">9</button>
 
                 <button class="empty"></button>
+
                 <button data-n="0">0</button>
-                <button id="clear">⌫</button>
+
+                <button id="clear">
+                    ⌫
+                </button>
 
             </div>
 
-            <p id="wrong" class="wrong"></p>
+
+            <p
+                id="wrong"
+                class="wrong"
+            ></p>
+
 
             <small>
                 A little secret awaits... 💙
@@ -58,34 +118,56 @@
     </section>
 
 
-    <!-- QUESTION -->
 
-    <section id="giftQuestion" class="screen">
+    <!-- ======================================
+         💙 QUESTION
+    ======================================= -->
+
+    <section
+        id="giftQuestion"
+        class="screen"
+    >
 
         <div class="paper">
+
+            <div class="cat cat-gift">
+                😽
+            </div>
+
 
             <div class="doodle">
                 ✦ ✧ ✦
             </div>
 
+
+            <p class="intro">
+                Hey Mimu...
+            </p>
+
+
             <h2>
-                I MADE SOMETHING<br>
+                I MADE SOMETHING
+                <br>
                 FOR YOU
             </h2>
+
 
             <p class="question">
                 Do you wanna see it?
             </p>
 
+
             <div class="gift">
                 🎁
             </div>
+
 
             <div class="buttons">
 
                 <button id="yes">
                     Yes 💙
                 </button>
+
 
                 <button id="no">
                     No 🙈
@@ -98,17 +180,34 @@
     </section>
 
 
-    <!-- GIFT -->
 
-    <section id="giftOpen" class="screen">
+    <!-- ======================================
+         🎁 GIFT
+    ======================================= -->
+
+    <section
+        id="giftOpen"
+        class="screen"
+    >
 
         <div class="paper">
 
+            <div class="cat cat-gift-open">
+                🐱🎀
+            </div>
+
+
             <p class="tiny">
-                A little something, just for you...
+                A little something,
+                <br>
+                just for you...
             </p>
 
-            <div id="box" class="box">
+
+            <div
+                id="box"
+                class="box"
+            >
 
                 <div class="lid">
                     🎀
@@ -120,46 +219,109 @@
 
             </div>
 
-            <button id="openGift" class="mainBtn">
+
+            <button
+                id="openGift"
+                class="mainBtn"
+            >
                 Open it ✨
             </button>
+
+
+            <p class="hint">
+                Something magical is waiting inside...
+            </p>
 
         </div>
 
     </section>
 
 
-    <!-- CAKE -->
 
-    <section id="cakeScreen" class="screen">
+    <!-- ======================================
+         🎂 CAKE
+    ======================================= -->
+
+    <section
+        id="cakeScreen"
+        class="screen"
+    >
 
         <div class="paper cakePaper">
+
+
+            <div class="cat cat-birthday">
+                🐱🎀
+            </div>
+
+
+            <div class="cake-cat-left">
+                🐱
+            </div>
+
 
             <div class="confetti">
                 ✦　✧　✦　✧　✦
             </div>
 
+
             <h1>
-                Happy Birthday, Mimu! 🎂
+                Happy Birthday,
+                <br>
+                Mimu! 🎂
             </h1>
 
+
             <p class="sub">
+
                 10 September 2009
+
+                <br><br>
+
+                Make a wish...
+
                 <br>
-                Make a wish... then blow the candles 💨
+
+                then blow the candles 💨
+
             </p>
+
+
+
+            <!-- CAKE -->
 
             <div class="cakeWrap">
 
+
+                <!-- FLAMES -->
+
                 <div class="flames">
 
-                    <span class="flame">🔥</span>
-                    <span class="flame">🔥</span>
-                    <span class="flame">🔥</span>
-                    <span class="flame">🔥</span>
-                    <span class="flame">🔥</span>
+                    <span class="flame">
+                        🔥
+                    </span>
+
+                    <span class="flame">
+                        🔥
+                    </span>
+
+                    <span class="flame">
+                        🔥
+                    </span>
+
+                    <span class="flame">
+                        🔥
+                    </span>
+
+                    <span class="flame">
+                        🔥
+                    </span>
 
                 </div>
+
+
+
+                <!-- CANDLES -->
 
                 <div class="candles">
 
@@ -171,7 +333,10 @@
 
                 </div>
 
+
+
                 <div class="cakeTop"></div>
+
 
                 <div class="cakeBody">
                     🍰
@@ -179,38 +344,72 @@
 
             </div>
 
-            <div id="wind" class="wind">
+
+
+            <!-- WIND -->
+
+            <div
+                id="wind"
+                class="wind"
+            >
                 〰️〰️💨
             </div>
 
-            <button id="blow" class="mainBtn">
+
+
+            <button
+                id="blow"
+                class="mainBtn"
+            >
                 🎤 Blow the candles
             </button>
 
-            <button id="skipBlow" class="textBtn">
+
+            <button
+                id="skipBlow"
+                class="textBtn"
+            >
                 Tap here if microphone doesn't work
             </button>
 
-            <p id="micStatus" class="status"></p>
+
+            <p
+                id="micStatus"
+                class="status"
+            ></p>
 
         </div>
 
     </section>
 
 
-    <!-- OLD LETTER -->
 
-    <section id="messageScreen" class="screen">
+    <!-- ======================================
+         💌 LETTER
+    ======================================= -->
+
+    <section
+        id="messageScreen"
+        class="screen"
+    >
 
         <div class="letterPage">
+
+
+            <div class="letter-cat">
+                😴🐱
+            </div>
+
 
             <div class="letterDecor">
                 ❦
             </div>
 
+
             <p class="letterTitle">
-                একটি ছোট্ট চিঠি
+                চিরকুট
             </p>
+
 
             <div class="letterRule"></div>
 
@@ -246,7 +445,10 @@
             </div>
 
 
-            <button id="replay" class="mainBtn">
+            <button
+                id="replay"
+                class="mainBtn"
+            >
                 Replay the surprise ↻
             </button>
 
@@ -255,9 +457,19 @@
     </section>
 
 
-    <canvas id="confettiCanvas"></canvas>
 
-    <script src="script.js"></script>
+    <!-- CONFETTI -->
+
+    <canvas
+        id="confettiCanvas"
+    ></canvas>
+
+
+    <script
+        src="script.js"
+    ></script>
+
 
 </body>
+
 </html>
